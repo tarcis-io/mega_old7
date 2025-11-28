@@ -204,12 +204,12 @@ func (c *Config) LogLevel() LogLevel {
 	return c.logLevel
 }
 
-// LogFormat returns the encoding style of log records.
+// LogFormat returns the configured encoding style of log records.
 func (c *Config) LogFormat() LogFormat {
 	return c.logFormat
 }
 
-// LogOutput returns the destination stream of log records.
+// LogOutput returns the configured destination stream of log records.
 func (c *Config) LogOutput() LogOutput {
 	return c.logOutput
 }
