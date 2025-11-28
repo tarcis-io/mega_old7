@@ -55,38 +55,86 @@ const (
 const (
 	// EnvLogLevel specifies the environment variable name for configuring the
 	// [LogLevel].
+	//
+	// Expected values:
+	//
+	//  - [LogLevelDebug]
+	//  - [LogLevelInfo]
+	//  - [LogLevelWarn]
+	//  - [LogLevelError]
+	//
+	// Default: [DefaultLogLevel]
 	EnvLogLevel = "LOG_LEVEL"
 
 	// EnvLogFormat specifies the environment variable name for configuring the
 	// [LogFormat].
+	//
+	// Expected values:
+	//
+	//  - [LogFormatText]
+	//  - [LogFormatJSON]
+	//
+	// Default: [DefaultLogFormat]
 	EnvLogFormat = "LOG_FORMAT"
 
 	// EnvLogOutput specifies the environment variable name for configuring the
 	// [LogOutput].
+	//
+	// Expected values:
+	//
+	//  - [LogOutputStdout]
+	//  - [LogOutputStderr]
+	//  - A custom string (typically a file path)
+	//
+	// Default: [DefaultLogOutput]
 	EnvLogOutput = "LOG_OUTPUT"
 
 	// EnvServerAddress specifies the environment variable name for configuring the
 	// server's address.
+	//
+	// Expected format: "<host>:port" (e.g., "localhost:8080", ":3000")
+	//
+	// Default: [DefaultServerAddress]
 	EnvServerAddress = "SERVER_ADDRESS"
 
 	// EnvServerReadTimeout specifies the environment variable name for configuring the
 	// server's read timeout.
+	//
+	// Expected format: [time.Duration] (e.g., "5s", "1m")
+	//
+	// Default: [DefaultServerReadTimeout]
 	EnvServerReadTimeout = "SERVER_READ_TIMEOUT"
 
 	// EnvServerReadHeaderTimeout specifies the environment variable name for
 	// configuring the server's read header timeout.
+	//
+	// Expected format: [time.Duration] (e.g., "5s", "1m")
+	//
+	// Default: [DefaultServerReadHeaderTimeout]
 	EnvServerReadHeaderTimeout = "SERVER_READ_HEADER_TIMEOUT"
 
 	// EnvServerWriteTimeout specifies the environment variable name for configuring
 	// the server's write timeout.
+	//
+	// Expected format: [time.Duration] (e.g., "5s", "1m")
+	//
+	// Default: [DefaultServerWriteTimeout]
 	EnvServerWriteTimeout = "SERVER_WRITE_TIMEOUT"
 
 	// EnvServerIdleTimeout specifies the environment variable name for configuring the
 	// server's idle timeout.
+	//
+	// Expected format: [time.Duration] (e.g., "5s", "1m")
+	//
+	// Default: [DefaultServerIdleTimeout]
 	EnvServerIdleTimeout = "SERVER_IDLE_TIMEOUT"
 
 	// EnvServerShutdownTimeout specifies the environment variable name for configuring
 	// the server's shutdown timeout.
+	//
+	// Expected format: [time.Duration] (e.g., "5s", "1m")
+	//
+	// Default: [DefaultServerShutdownTimeout]
 	EnvServerShutdownTimeout = "SERVER_SHUTDOWN_TIMEOUT"
 )
 
