@@ -139,13 +139,39 @@ const (
 )
 
 const (
-	DefaultLogLevel                = LogLevelInfo
-	DefaultLogFormat               = LogFormatText
-	DefaultLogOutput               = LogOutputStdout
-	DefaultServerAddress           = "localhost:8080"
-	DefaultServerReadTimeout       = 5 * time.Second
+	// DefaultLogLevel specifies the default [LogLevel], used as the fallback when
+	// [EnvLogLevel] is unset.
+	DefaultLogLevel = LogLevelInfo
+
+	// DefaultLogFormat specifies the default [LogFormat], used as the fallback when
+	// [EnvLogFormat] is unset.
+	DefaultLogFormat = LogFormatText
+
+	// DefaultLogOutput specifies the default [LogOutput], used as the fallback when
+	// [EnvLogOutput] is unset.
+	DefaultLogOutput = LogOutputStdout
+
+	// DefaultServerAddress specifies the default server address, used as the fallback
+	// when [EnvServerAddress] is unset.
+	DefaultServerAddress = "localhost:8080"
+
+	// DefaultServerReadTimeout specifies the default server read timeout, used as the
+	// fallback when [EnvServerReadTimeout] is unset.
+	DefaultServerReadTimeout = 5 * time.Second
+
+	// DefaultServerReadHeaderTimeout specifies the default server read header timeout,
+	// used as the fallback when [EnvServerReadHeaderTimeout] is unset.
 	DefaultServerReadHeaderTimeout = 2 * time.Second
-	DefaultServerWriteTimeout      = 10 * time.Second
-	DefaultServerIdleTimeout       = 1 * time.Minute
-	DefaultServerShutdownTimeout   = 15 * time.Second
+
+	// DefaultServerWriteTimeout specifies the default server write timeout, used as
+	// the fallback when [EnvServerWriteTimeout] is unset.
+	DefaultServerWriteTimeout = 10 * time.Second
+
+	// DefaultServerIdleTimeout specifies the default server idle timeout, used as the
+	// fallback when [EnvServerIdleTimeout] is unset.
+	DefaultServerIdleTimeout = 60 * time.Second
+
+	// DefaultServerShutdownTimeout specifies the default server shutdown timeout, used
+	// as the fallback when [EnvServerShutdownTimeout] is unset.
+	DefaultServerShutdownTimeout = 15 * time.Second
 )
