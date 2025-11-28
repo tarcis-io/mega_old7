@@ -243,3 +243,49 @@ func (c *Config) ServerIdleTimeout() time.Duration {
 func (c *Config) ServerShutdownTimeout() time.Duration {
 	return c.serverShutdownTimeout
 }
+
+type (
+	loader struct {
+		errs []error
+	}
+)
+
+func newLoader() *loader {
+	return &loader{}
+}
+
+func (l *loader) logLevel() LogLevel {
+	return ""
+}
+
+func (l *loader) logFormat() LogFormat {
+	return ""
+}
+
+func (l *loader) logOutput() LogOutput {
+	return ""
+}
+
+func (l *loader) serverAddress() string {
+	return ""
+}
+
+func (l *loader) serverReadTimeout() time.Duration {
+	return 0
+}
+
+func (l *loader) serverReadHeaderTimeout() time.Duration {
+	return 0
+}
+
+func (l *loader) serverWriteTimeout() time.Duration {
+	return 0
+}
+
+func (l *loader) serverIdleTimeout() time.Duration {
+	return 0
+}
+
+func (l *loader) serverShutdownTimeout() time.Duration {
+	return 0
+}
