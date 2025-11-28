@@ -198,3 +198,39 @@ type (
 		serverShutdownTimeout   time.Duration
 	}
 )
+
+func (c *Config) LogLevel() LogLevel {
+	return c.logLevel
+}
+
+func (c *Config) LogFormat() LogFormat {
+	return c.logFormat
+}
+
+func (c *Config) LogOutput() LogOutput {
+	return c.logOutput
+}
+
+func (c *Config) ServerAddress() string {
+	return c.serverAddress
+}
+
+func (c *Config) ServerReadTimeout() time.Duration {
+	return c.serverReadTimeout
+}
+
+func (c *Config) ServerReadHeaderTimeout() time.Duration {
+	return c.serverReadHeaderTimeout
+}
+
+func (c *Config) ServerWriteTimeout() time.Duration {
+	return c.serverWriteTimeout
+}
+
+func (c *Config) ServerIdleTimeout() time.Duration {
+	return c.serverIdleTimeout
+}
+
+func (c *Config) ServerShutdownTimeout() time.Duration {
+	return c.serverShutdownTimeout
+}
