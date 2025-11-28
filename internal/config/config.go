@@ -183,3 +183,18 @@ const (
 	// TCPPortMax defines the maximum port number for TCP connections.
 	TCPPortMax = 65535
 )
+
+type (
+	// Config represents the immutable application configuration.
+	Config struct {
+		logLevel                LogLevel
+		logFormat               LogFormat
+		logOutput               LogOutput
+		serverAddress           string
+		serverReadTimeout       time.Duration
+		serverReadHeaderTimeout time.Duration
+		serverWriteTimeout      time.Duration
+		serverIdleTimeout       time.Duration
+		serverShutdownTimeout   time.Duration
+	}
+)
