@@ -53,15 +53,41 @@ const (
 )
 
 const (
-	EnvLogLevel                = "LOG_LEVEL"
-	EnvLogFormat               = "LOG_FORMAT"
-	EnvLogOutput               = "LOG_OUTPUT"
-	EnvServerAddress           = "SERVER_ADDRESS"
-	EnvServerReadTimeout       = "SERVER_READ_TIMEOUT"
+	// EnvLogLevel specifies the environment variable name for configuring the
+	// [LogLevel].
+	EnvLogLevel = "LOG_LEVEL"
+
+	// EnvLogFormat specifies the environment variable name for configuring the
+	// [LogFormat].
+	EnvLogFormat = "LOG_FORMAT"
+
+	// EnvLogOutput specifies the environment variable name for configuring the
+	// [LogOutput].
+	EnvLogOutput = "LOG_OUTPUT"
+
+	// EnvServerAddress specifies the environment variable name for configuring the
+	// server's address.
+	EnvServerAddress = "SERVER_ADDRESS"
+
+	// EnvServerReadTimeout specifies the environment variable name for configuring the
+	// server's read timeout.
+	EnvServerReadTimeout = "SERVER_READ_TIMEOUT"
+
+	// EnvServerReadHeaderTimeout specifies the environment variable name for
+	// configuring the server's read header timeout.
 	EnvServerReadHeaderTimeout = "SERVER_READ_HEADER_TIMEOUT"
-	EnvServerWriteTimeout      = "SERVER_WRITE_TIMEOUT"
-	EnvServerIdleTimeout       = "SERVER_IDLE_TIMEOUT"
-	EnvServerShutdownTimeout   = "SERVER_SHUTDOWN_TIMEOUT"
+
+	// EnvServerWriteTimeout specifies the environment variable name for configuring
+	// the server's write timeout.
+	EnvServerWriteTimeout = "SERVER_WRITE_TIMEOUT"
+
+	// EnvServerIdleTimeout specifies the environment variable name for configuring the
+	// server's idle timeout.
+	EnvServerIdleTimeout = "SERVER_IDLE_TIMEOUT"
+
+	// EnvServerShutdownTimeout specifies the environment variable name for configuring
+	// the server's shutdown timeout.
+	EnvServerShutdownTimeout = "SERVER_SHUTDOWN_TIMEOUT"
 )
 
 const (
