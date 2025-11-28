@@ -199,38 +199,47 @@ type (
 	}
 )
 
+// LogLevel returns the configured severity or verbosity of log records.
 func (c *Config) LogLevel() LogLevel {
 	return c.logLevel
 }
 
+// LogFormat returns the encoding style of log records.
 func (c *Config) LogFormat() LogFormat {
 	return c.logFormat
 }
 
+// LogOutput returns the destination stream of log records.
 func (c *Config) LogOutput() LogOutput {
 	return c.logOutput
 }
 
+// ServerAddress returns the configured server's address.
 func (c *Config) ServerAddress() string {
 	return c.serverAddress
 }
 
+// ServerReadTimeout returns the configured server's read timeout.
 func (c *Config) ServerReadTimeout() time.Duration {
 	return c.serverReadTimeout
 }
 
+// ServerReadHeaderTimeout returns the configured server's read header timeout.
 func (c *Config) ServerReadHeaderTimeout() time.Duration {
 	return c.serverReadHeaderTimeout
 }
 
+// ServerWriteTimeout returns the configured server's write timeout.
 func (c *Config) ServerWriteTimeout() time.Duration {
 	return c.serverWriteTimeout
 }
 
+// ServerIdleTimeout returns the configured server's idle timeout.
 func (c *Config) ServerIdleTimeout() time.Duration {
 	return c.serverIdleTimeout
 }
 
+// ServerShutdownTimeout returns the configured server's shutdown timeout.
 func (c *Config) ServerShutdownTimeout() time.Duration {
 	return c.serverShutdownTimeout
 }
