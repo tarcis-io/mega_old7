@@ -4,6 +4,7 @@ package config
 import (
 	"errors"
 	"fmt"
+	"os"
 	"time"
 )
 
@@ -314,6 +315,18 @@ func (l *loader) serverIdleTimeout() time.Duration {
 
 func (l *loader) serverShutdownTimeout() time.Duration {
 	return 0
+}
+
+func (l *loader) loadEnv(key, fallback string) string {
+	val, ok := os.LookupEnv(key)
+	if !ok {
+		return fallback
+	}
+	if val == "" {
+		l.appendError("invalid configuration (%s) got=%q", key, val)
+		return fallback
+	}
+	return val
 }
 
 func (l *loader) appendError(format string, args ...any) {
