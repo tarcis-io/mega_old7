@@ -200,6 +200,25 @@ type (
 	}
 )
 
+func New() (*Config, error) {
+	l := newLoader()
+	cfg := &Config{
+		logLevel:                l.logLevel(),
+		logFormat:               l.logFormat(),
+		logOutput:               l.logOutput(),
+		serverAddress:           l.serverAddress(),
+		serverReadTimeout:       l.serverReadTimeout(),
+		serverReadHeaderTimeout: l.serverReadHeaderTimeout(),
+		serverWriteTimeout:      l.serverWriteTimeout(),
+		serverIdleTimeout:       l.serverIdleTimeout(),
+		serverShutdownTimeout:   l.serverShutdownTimeout(),
+	}
+	if err := l.Err(); err != nil {
+		return nil, err
+	}
+	return cfg, nil
+}
+
 // LogLevel returns the configured severity or verbosity of log records.
 func (c *Config) LogLevel() LogLevel {
 	return c.logLevel
