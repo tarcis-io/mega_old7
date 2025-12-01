@@ -316,8 +316,8 @@ func (l *loader) serverShutdownTimeout() time.Duration {
 	return 0
 }
 
-func (l *loader) appendError(err error) {
-	l.errs = append(l.errs, err)
+func (l *loader) appendError(format string, args ...any) {
+	l.errs = append(l.errs, fmt.Errorf(format, args...))
 }
 
 func (l *loader) Err() error {
