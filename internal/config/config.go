@@ -2,6 +2,7 @@
 package config
 
 import (
+	"errors"
 	"time"
 )
 
@@ -288,4 +289,15 @@ func (l *loader) serverIdleTimeout() time.Duration {
 
 func (l *loader) serverShutdownTimeout() time.Duration {
 	return 0
+}
+
+func (l *loader) appendError(err error) {
+	l.errs = append(l.errs, err)
+}
+
+func (l *loader) Err() error {
+	if len(l.errs) == 0 {
+		return nil
+	}
+	return errors.Join(l.errs...)
 }
