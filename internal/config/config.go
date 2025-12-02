@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -318,7 +319,7 @@ func (l *loader) serverShutdownTimeout() time.Duration {
 }
 
 func (l *loader) loadEnv(key, fallback string) string {
-	if val, ok := os.LookupEnv(key); ok && val != "" {
+	if val, ok := os.LookupEnv(key); ok && strings.TrimSpace(val) != "" {
 		return val
 	}
 	return fallback
