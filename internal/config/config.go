@@ -4,6 +4,7 @@ package config
 import (
 	"errors"
 	"fmt"
+	"os"
 	"time"
 )
 
@@ -321,4 +322,11 @@ func (l *loader) Err() error {
 		return nil
 	}
 	return errors.Join(l.errs...)
+}
+
+func getEnv(key, fallback string) string {
+	if val, ok := os.LookupEnv(key); ok && val != "" {
+		return val
+	}
+	return fallback
 }
