@@ -2,6 +2,7 @@
 package config
 
 import (
+	"fmt"
 	"time"
 )
 
@@ -217,6 +218,9 @@ func New() (*Config, error) {
 		serverIdleTimeout:       l.serverIdleTimeout(),
 		serverShutdownTimeout:   l.serverShutdownTimeout(),
 	}
+	if err := l.Err(); err != nil {
+		return nil, fmt.Errorf("failed to load application configuration: %w", err)
+	}
 	return cfg, nil
 }
 
@@ -309,4 +313,8 @@ func (l *loader) serverIdleTimeout() time.Duration {
 
 func (l *loader) serverShutdownTimeout() time.Duration {
 	return 0
+}
+
+func (l *loader) Err() error {
+	return nil
 }
