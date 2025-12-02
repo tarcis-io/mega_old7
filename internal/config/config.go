@@ -325,6 +325,10 @@ func (l *loader) loadEnv(key, fallback string) string {
 	return fallback
 }
 
+func (l *loader) normalize(s string) string {
+	return strings.TrimSpace(strings.ToLower(s))
+}
+
 func (l *loader) appendError(err error) {
 	if err == nil {
 		return
