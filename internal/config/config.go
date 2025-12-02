@@ -317,16 +317,16 @@ func (l *loader) serverShutdownTimeout() time.Duration {
 	return 0
 }
 
+func (l *loader) loadEnv(key, fallback string) string {
+	if val, ok := os.LookupEnv(key); ok && val != "" {
+		return val
+	}
+	return fallback
+}
+
 func (l *loader) Err() error {
 	if len(l.errs) == 0 {
 		return nil
 	}
 	return errors.Join(l.errs...)
-}
-
-func getEnv(key, fallback string) string {
-	if val, ok := os.LookupEnv(key); ok && val != "" {
-		return val
-	}
-	return fallback
 }
