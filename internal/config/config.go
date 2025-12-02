@@ -318,15 +318,10 @@ func (l *loader) serverShutdownTimeout() time.Duration {
 }
 
 func (l *loader) loadEnv(key, fallback string) string {
-	val, ok := os.LookupEnv(key)
-	if !ok {
-		return fallback
+	if val, ok := os.LookupEnv(key); ok && val != "" {
+		return val
 	}
-	if val == "" {
-		l.appendError("invalid configuration (%s) got=%q", key, val)
-		return fallback
-	}
-	return val
+	return fallback
 }
 
 func (l *loader) appendError(format string, args ...any) {
