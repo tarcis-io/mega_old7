@@ -219,7 +219,7 @@ func New() (*Config, error) {
 		serverShutdownTimeout:   l.serverShutdownTimeout(),
 	}
 	if err := l.Err(); err != nil {
-		return nil, fmt.Errorf("failed to load application configuration: %w", err)
+		return nil, fmt.Errorf("failed to load the application configuration: %w", err)
 	}
 	return cfg, nil
 }
