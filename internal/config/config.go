@@ -2,9 +2,6 @@
 package config
 
 import (
-	"errors"
-	"fmt"
-	"os"
 	"time"
 )
 
@@ -220,9 +217,6 @@ func New() (*Config, error) {
 		serverIdleTimeout:       l.serverIdleTimeout(),
 		serverShutdownTimeout:   l.serverShutdownTimeout(),
 	}
-	if err := l.Err(); err != nil {
-		return nil, fmt.Errorf("failed to load config: %w", err)
-	}
 	return cfg, nil
 }
 
@@ -315,22 +309,4 @@ func (l *loader) serverIdleTimeout() time.Duration {
 
 func (l *loader) serverShutdownTimeout() time.Duration {
 	return 0
-}
-
-func (l *loader) loadEnv(key, fallback string) string {
-	if val, ok := os.LookupEnv(key); ok && val != "" {
-		return val
-	}
-	return fallback
-}
-
-func (l *loader) appendError(format string, args ...any) {
-	l.errs = append(l.errs, fmt.Errorf(format, args...))
-}
-
-func (l *loader) Err() error {
-	if len(l.errs) == 0 {
-		return nil
-	}
-	return errors.Join(l.errs...)
 }
