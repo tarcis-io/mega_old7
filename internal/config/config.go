@@ -326,10 +326,9 @@ func (l *loader) loadEnv(key, fallback string) string {
 }
 
 func (l *loader) appendError(err error) {
-	if err == nil {
-		return
+	if err != nil {
+		l.errs = append(l.errs, err)
 	}
-	l.errs = append(l.errs, err)
 }
 
 func (l *loader) appendErrorf(format string, args ...any) {
@@ -337,8 +336,5 @@ func (l *loader) appendErrorf(format string, args ...any) {
 }
 
 func (l *loader) Err() error {
-	if len(l.errs) == 0 {
-		return nil
-	}
 	return errors.Join(l.errs...)
 }
