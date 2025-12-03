@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"slices"
 	"strings"
 	"time"
 )
@@ -316,6 +317,18 @@ func (l *loader) serverIdleTimeout() time.Duration {
 
 func (l *loader) serverShutdownTimeout() time.Duration {
 	return 0
+}
+
+func (l *loader) loadEnum(key, fallback string, allowed ...string) string {
+	val := l.loadEnv(key, fallback)
+	idx := slices.IndexFunc(allowed, func(s string) bool {
+		return strings.EqualFold(val, s)
+	})
+	if idx >= 0 {
+		return allowed[idx]
+	}
+	l.appendErrorf("invalid configuration (%s) got=%q allowed=%v", key, val, allowed)
+	return fallback
 }
 
 func (l *loader) loadEnv(key, fallback string) string {
