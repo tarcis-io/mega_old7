@@ -319,14 +319,10 @@ func (l *loader) serverShutdownTimeout() time.Duration {
 }
 
 func (l *loader) loadEnv(key, fallback string) string {
-	if val, ok := os.LookupEnv(key); ok && l.normalize(val) != "" {
+	if val := strings.TrimSpace(os.Getenv(key)); val != "" {
 		return val
 	}
 	return fallback
-}
-
-func (l *loader) normalize(s string) string {
-	return strings.TrimSpace(strings.ToLower(s))
 }
 
 func (l *loader) appendError(err error) {
