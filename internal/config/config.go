@@ -319,33 +319,33 @@ func (l *loader) serverShutdownTimeout() time.Duration {
 	return 0
 }
 
-func (l *loader) loadEnum(key, fallback string, allowed ...string) string {
-	val := l.loadEnv(key, fallback)
+func (l *loader) loadEnum(envKey, defaultValue string, allowed ...string) string {
+	val := l.loadEnv(envKey, defaultValue)
 	idx := slices.IndexFunc(allowed, func(s string) bool {
 		return strings.EqualFold(val, s)
 	})
 	if idx >= 0 {
 		return allowed[idx]
 	}
-	l.appendErrorf("invalid configuration (%s) got=%q allowed=%v", key, val, allowed)
-	return fallback
+	l.addErrorf("invalid configuration (%s) got=%q allowed=%v", envKey, val, allowed)
+	return defaultValue
 }
 
-func (l *loader) loadEnv(key, fallback string) string {
-	if val := strings.TrimSpace(os.Getenv(key)); val != "" {
+func (l *loader) loadEnv(envKey, defaultValue string) string {
+	if val := strings.TrimSpace(os.Getenv(envKey)); val != "" {
 		return val
 	}
-	return fallback
+	return defaultValue
 }
 
-func (l *loader) appendError(err error) {
+func (l *loader) addError(err error) {
 	if err != nil {
 		l.errs = append(l.errs, err)
 	}
 }
 
-func (l *loader) appendErrorf(format string, args ...any) {
-	l.appendError(fmt.Errorf(format, args...))
+func (l *loader) addErrorf(format string, args ...any) {
+	l.addError(fmt.Errorf(format, args...))
 }
 
 func (l *loader) Err() error {
