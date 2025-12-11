@@ -351,3 +351,256 @@ func (l *loader) addErrorf(format string, args ...any) {
 func (l *loader) Err() error {
 	return errors.Join(l.errs...)
 }
+
+// New() to Load()
+// create load(lookup)
+// defaultValue to fallback
+// loadEnv to get
+// loadServerAddress to serverAddress
+
+
+// Package config loads and provides the application configuration.
+package config
+
+import (
+	"time"
+)
+
+type (
+	// LogLevel represents the severity of log records.
+	LogLevel string
+)
+
+const (
+	// LogLevelDebug captures detailed information, typically useful for development
+	// and debugging.
+	LogLevelDebug LogLevel = "debug"
+
+	// LogLevelInfo captures general operational information.
+	LogLevelInfo LogLevel = "info"
+
+	// LogLevelWarn captures non-critical events or potentially harmful situations.
+	LogLevelWarn LogLevel = "warn"
+
+	// LogLevelError captures critical events or errors that require immediate
+	// attention.
+	LogLevelError LogLevel = "error"
+)
+
+type (
+	// LogFormat represents the encoding style of log records.
+	LogFormat string
+)
+
+const (
+	// LogFormatText renders log records as human-readable text.
+	LogFormatText LogFormat = "text"
+
+	// LogFormatJSON renders log records as structured JSON objects.
+	LogFormatJSON LogFormat = "json"
+)
+
+type (
+	// LogOutput represents the destination stream of log records.
+	LogOutput string
+)
+
+const (
+	// LogOutputStdout writes log records to the standard output stream (stdout).
+	LogOutputStdout LogOutput = "stdout"
+
+	// LogOutputStderr writes log records to the standard error stream (stderr).
+	LogOutputStderr LogOutput = "stderr"
+)
+
+const (
+	// EnvLogLevel specifies the environment variable name for configuring the
+	// [LogLevel].
+	//
+	// Expected values:
+	//
+	//  - [LogLevelDebug]
+	//  - [LogLevelInfo]
+	//  - [LogLevelWarn]
+	//  - [LogLevelError]
+	//
+	// Default: [DefaultLogLevel]
+	EnvLogLevel = "LOG_LEVEL"
+
+	// EnvLogFormat specifies the environment variable name for configuring the
+	// [LogFormat].
+	//
+	// Expected values:
+	//
+	//  - [LogFormatText]
+	//  - [LogFormatJSON]
+	//
+	// Default: [DefaultLogFormat]
+	EnvLogFormat = "LOG_FORMAT"
+
+	// EnvLogOutput specifies the environment variable name for configuring the
+	// [LogOutput].
+	//
+	// Expected values:
+	//
+	//  - [LogOutputStdout]
+	//  - [LogOutputStderr]
+	//  - A custom string (typically a file path)
+	//
+	// Default: [DefaultLogOutput]
+	EnvLogOutput = "LOG_OUTPUT"
+
+	// EnvServerAddress specifies the environment variable name for configuring the
+	// server address.
+	//
+	// Expected format: "<host>:port" (e.g., "localhost:8080", ":3000")
+	//
+	// Default: [DefaultServerAddress]
+	EnvServerAddress = "SERVER_ADDRESS"
+
+	// EnvServerReadTimeout specifies the environment variable name for configuring the
+	// server read timeout.
+	//
+	// Expected format: [time.Duration] (e.g., "5s", "1m")
+	//
+	// Default: [DefaultServerReadTimeout]
+	EnvServerReadTimeout = "SERVER_READ_TIMEOUT"
+
+	// EnvServerReadHeaderTimeout specifies the environment variable name for
+	// configuring the server read header timeout.
+	//
+	// Expected format: [time.Duration] (e.g., "5s", "1m")
+	//
+	// Default: [DefaultServerReadHeaderTimeout]
+	EnvServerReadHeaderTimeout = "SERVER_READ_HEADER_TIMEOUT"
+
+	// EnvServerWriteTimeout specifies the environment variable name for configuring
+	// the server write timeout.
+	//
+	// Expected format: [time.Duration] (e.g., "5s", "1m")
+	//
+	// Default: [DefaultServerWriteTimeout]
+	EnvServerWriteTimeout = "SERVER_WRITE_TIMEOUT"
+
+	// EnvServerIdleTimeout specifies the environment variable name for configuring the
+	// server idle timeout.
+	//
+	// Expected format: [time.Duration] (e.g., "5s", "1m")
+	//
+	// Default: [DefaultServerIdleTimeout]
+	EnvServerIdleTimeout = "SERVER_IDLE_TIMEOUT"
+
+	// EnvServerShutdownTimeout specifies the environment variable name for configuring
+	// the server shutdown timeout.
+	//
+	// Expected format: [time.Duration] (e.g., "5s", "1m")
+	//
+	// Default: [DefaultServerShutdownTimeout]
+	EnvServerShutdownTimeout = "SERVER_SHUTDOWN_TIMEOUT"
+)
+
+const (
+	// DefaultLogLevel specifies the default [LogLevel], used as the fallback when
+	// [EnvLogLevel] is unset.
+	DefaultLogLevel = LogLevelInfo
+
+	// DefaultLogFormat specifies the default [LogFormat], used as the fallback when
+	// [EnvLogFormat] is unset.
+	DefaultLogFormat = LogFormatText
+
+	// DefaultLogOutput specifies the default [LogOutput], used as the fallback when
+	// [EnvLogOutput] is unset.
+	DefaultLogOutput = LogOutputStdout
+
+	// DefaultServerAddress specifies the default server address, used as the fallback
+	// when [EnvServerAddress] is unset.
+	DefaultServerAddress = "localhost:8080"
+
+	// DefaultServerReadTimeout specifies the default server read timeout, used as the
+	// fallback when [EnvServerReadTimeout] is unset.
+	DefaultServerReadTimeout = 5 * time.Second
+
+	// DefaultServerReadHeaderTimeout specifies the default server read header timeout,
+	// used as the fallback when [EnvServerReadHeaderTimeout] is unset.
+	DefaultServerReadHeaderTimeout = 2 * time.Second
+
+	// DefaultServerWriteTimeout specifies the default server write timeout, used as
+	// the fallback when [EnvServerWriteTimeout] is unset.
+	DefaultServerWriteTimeout = 10 * time.Second
+
+	// DefaultServerIdleTimeout specifies the default server idle timeout, used as the
+	// fallback when [EnvServerIdleTimeout] is unset.
+	DefaultServerIdleTimeout = 60 * time.Second
+
+	// DefaultServerShutdownTimeout specifies the default server shutdown timeout, used
+	// as the fallback when [EnvServerShutdownTimeout] is unset.
+	DefaultServerShutdownTimeout = 15 * time.Second
+)
+
+const (
+	// TCPPortMin defines the minimum port number for TCP connections.
+	TCPPortMin = 0
+
+	// TCPPortMax defines the maximum port number for TCP connections.
+	TCPPortMax = 65535
+)
+
+type (
+	// Config represents the immutable application configuration.
+	Config struct {
+		logLevel                LogLevel
+		logFormat               LogFormat
+		logOutput               LogOutput
+		serverAddress           string
+		serverReadTimeout       time.Duration
+		serverReadHeaderTimeout time.Duration
+		serverWriteTimeout      time.Duration
+		serverIdleTimeout       time.Duration
+		serverShutdownTimeout   time.Duration
+	}
+)
+
+// LogLevel returns the configured severity of log records.
+func (c *Config) LogLevel() LogLevel {
+	return c.logLevel
+}
+
+// LogFormat returns the configured encoding style of log records.
+func (c *Config) LogFormat() LogFormat {
+	return c.logFormat
+}
+
+// LogOutput returns the configured destination stream of log records.
+func (c *Config) LogOutput() LogOutput {
+	return c.logOutput
+}
+
+// ServerAddress returns the configured server address.
+func (c *Config) ServerAddress() string {
+	return c.serverAddress
+}
+
+// ServerReadTimeout returns the configured server read timeout.
+func (c *Config) ServerReadTimeout() time.Duration {
+	return c.serverReadTimeout
+}
+
+// ServerReadHeaderTimeout returns the configured server read header timeout.
+func (c *Config) ServerReadHeaderTimeout() time.Duration {
+	return c.serverReadHeaderTimeout
+}
+
+// ServerWriteTimeout returns the configured server write timeout.
+func (c *Config) ServerWriteTimeout() time.Duration {
+	return c.serverWriteTimeout
+}
+
+// ServerIdleTimeout returns the configured server idle timeout.
+func (c *Config) ServerIdleTimeout() time.Duration {
+	return c.serverIdleTimeout
+}
+
+// ServerShutdownTimeout returns the configured server shutdown timeout.
+func (c *Config) ServerShutdownTimeout() time.Duration {
+	return c.serverShutdownTimeout
+}
